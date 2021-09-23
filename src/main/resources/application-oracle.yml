@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@192.168.130.74:1521:NBILLDEV
+    username: pcbsbill
+    password: bill_7pass
+    driver-class-name: oracle.jdbc.OracleDriver
+  batch:
+    jdbc:
+      initialize-schema: never
