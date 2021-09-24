@@ -44,7 +44,7 @@ public class SaveUserTasklet implements Tasklet {
                             .createdDate(LocalDate.of(2020,11,1))
                             .itemName("item" + i)
                             .build()))
-                    .username("test username" + i)
+                    .userName("test username" + i)
                     .build());
         }
 
@@ -56,7 +56,7 @@ public class SaveUserTasklet implements Tasklet {
                             .createdDate(LocalDate.of(2020,12,2))
                             .itemName("item" + i)
                             .build()))
-                    .username("test username" + i)
+//                    .userName("test username" + i)
                     .build());
         }
 
@@ -68,7 +68,7 @@ public class SaveUserTasklet implements Tasklet {
                             .createdDate(LocalDate.of(2020,11,3))
                             .itemName("item" + i)
                             .build()))
-                    .username("test username" + i)
+                    .userName("test username" + i)
                     .build());
         }
 
@@ -80,7 +80,7 @@ public class SaveUserTasklet implements Tasklet {
                             .createdDate(LocalDate.of(2020,11,4))
                             .itemName("item" + i)
                             .build()))
-                    .username("test username" + i)
+                    .userName("test username" + i)
                     .build());
         }
 
