@@ -11,8 +11,8 @@ public class CustomSPParamSetter implements PreparedStatementSetter {
     @Override
     public void setValues(PreparedStatement ps) throws SQLException {
         CallableStatement callableStatement = (CallableStatement) ps;
-//        callableStatement.setString(1,null);
-        callableStatement.registerOutParameter(1, Types.VARCHAR);
-        callableStatement.registerOutParameter(2, Types.VARCHAR);
+        callableStatement.setString(1,"202109");
+//        callableStatement.registerOutParameter(1, Types.VARCHAR);
+//        callableStatement.registerOutParameter(2, Types.VARCHAR);
     }
 }

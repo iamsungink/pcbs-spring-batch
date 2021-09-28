@@ -9,32 +9,19 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.database.JdbcCursorItemReader;
-import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.StoredProcedureItemReader;
-import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuilder;
-import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.batch.item.database.builder.StoredProcedureItemReaderBuilder;
-import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.core.SqlOutParameter;
+import org.springframework.jdbc.core.SqlParameter;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -92,12 +79,12 @@ public class SpCallTestConfiguration {
         StoredProcedureItemReader itemReader = new StoredProcedureItemReaderBuilder<>()
                 .name("spCallReader")
                 .dataSource(dataSource)
-                .procedureName("SP_KSI_TEST")
+                .procedureName("SP_KSI_TEST2")
 //                .parameters(new SqlParameters[])
                 .parameters(new SqlParameter[]{
-//                        new SqlParameter("I_INV_YYYYMM", Types.VARCHAR),
-                        new SqlOutParameter("@OUT_RETURN_STATUS", Types.VARCHAR),
-                        new SqlOutParameter("@OUT_ERR_MSG", Types.VARCHAR)
+                        new SqlParameter("I_INV_YYYYMM", Types.VARCHAR)
+//                        new SqlOutParameter("@OUT_RETURN_STATUS", Types.VARCHAR),
+//                        new SqlOutParameter("@OUT_ERR_MSG", Types.VARCHAR)
                 })
 //                .preparedStatementSetter(new ArgumentPreparedStatementSetter(new Object[] {null,null,null}))
 //                .preparedStatementSetter(new PreparedStatementSetter() {
@@ -111,7 +98,6 @@ public class SpCallTestConfiguration {
                 .preparedStatementSetter(new CustomSPParamSetter())
 //                .preparedStatementSetter(new ArgumentPreparedStatementSetter(new Object[]{null, new CustomSPParamSetter()}))
                 .rowMapper(new SpCallRowMapper())
-//                .function()
                 .build();
 
         itemReader.afterPropertiesSet();
